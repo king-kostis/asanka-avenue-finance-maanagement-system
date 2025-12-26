@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class SalesService {
     private static List<Sales> sales = new ArrayList<>();
+    private static final LocalDate currentDate = LocalDate.now();
 
     public List<Sales> getAll(){
         return sales;
@@ -31,7 +32,6 @@ public class SalesService {
     public double totalDaily(){
         double total = 0;
         for(int i = 0; i < sales.size(); i++){
-            LocalDate currentDate = LocalDate.now();
             LocalDate salesDate = sales.get(i).getDateOfSale();
 
             if(currentDate.equals(salesDate)) {
@@ -45,7 +45,6 @@ public class SalesService {
     public double totalMonthly(){
         double total = 0;
         for(int i = 0; i < sales.size(); i++){
-            LocalDate currentDate = LocalDate.now();
             LocalDate saleDate = sales.get(i).getDateOfSale();
 
             long dateInterval = ChronoUnit.DAYS.between(currentDate, saleDate);
@@ -61,7 +60,6 @@ public class SalesService {
     public double totalYearly(){
         double total = 0;
         for(int i = 0; i < sales.size(); i++){
-            LocalDate currentDate = LocalDate.now();
             LocalDate saleDate = sales.get(i).getDateOfSale();
 
             long dateInterval = ChronoUnit.DAYS.between(currentDate, saleDate);
