@@ -1,24 +1,36 @@
 package com.example.asankawebapp.model;
 
+import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
+@Entity
+@Table(name="inventory")
 public class Stocks {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+
+    @Column(name="product_name")
     private String productName;
-    private LocalDate stockDate;
+
+    @Column(name="stock_date")
+    private LocalDate stockDate = LocalDate.now();
+
+    @Column(name="quantity")
     private int quantity;
 
-    Stocks(int id, String productName, LocalDate stockDate, int quantity){
+    public Stocks(int id, String productName, int quantity){
         this.id = id;
         this.productName = productName;
-        this.stockDate = stockDate;
         this.quantity = quantity;
     }
 
-    Stocks(){}
+    public Stocks(){}
 
     public int getId(){
         return id;

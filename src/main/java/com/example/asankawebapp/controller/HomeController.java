@@ -45,6 +45,7 @@ public class HomeController {
     @GetMapping("/sales")
     public String getSales(Model model){
         model.addAttribute("sales", salesService.getAll());
+        model.addAttribute("sale", new Sales());
         return "sales.html";
     }
 
@@ -64,13 +65,13 @@ public class HomeController {
     @PostMapping("/expenses")
     public String addSales(@ModelAttribute("expense") Expenses expense){
         expenseService.add(expense);
-
         return "expenses.html";
     }
 
     @GetMapping("/inventory")
     public String getInventory(Model model){
         model.addAttribute("stocks", stockService.getAll());
+        model.addAttribute("stock", new Stocks());
         return "inventory.html";
     }
 
