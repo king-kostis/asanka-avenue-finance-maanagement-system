@@ -8,10 +8,7 @@ import com.example.asankawebapp.service.SalesService;
 import com.example.asankawebapp.service.StockService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
@@ -65,7 +62,13 @@ public class HomeController {
     @PostMapping("/expenses")
     public String addSales(@ModelAttribute("expense") Expenses expense){
         expenseService.add(expense);
-        return "expenses.html";
+        return "redirect:/expenses";
+    }
+    @PostMapping("/expenses/delete/{id}")
+    public String deleteExpense(Model model, @PathVariable int id){
+        expenseService.delete(id);
+        model.addAttribute("expense", new Expenses());
+        return "redirect:/expenses";
     }
 
     @GetMapping("/inventory")
@@ -78,6 +81,12 @@ public class HomeController {
     @PostMapping("/inventory")
     public String addInventory(@ModelAttribute("stock") Stocks stock){
         stockService.add(stock);
+        return "inventory.html";
+    }
+
+    @PostMapping("/inventory/delete/{id}")
+    public String deleteInventory(@PathVariable int id){
+        stockService.delete(id);
         return "inventory.html";
     }
 }

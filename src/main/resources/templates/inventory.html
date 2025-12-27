@@ -29,9 +29,13 @@
       <div class="p-8 flex flex-col lg:flex-row gap-8">
         <div class="w-full lg:w-1/3 bg-white p-6 rounded-xl shadow-sm border border-gray-200">
           <h3 class="font-bold text-lg mb-4">Stock Intake</h3>
-          <form class="space-y-4">
-            <div><label class="block text-xs font-bold text-gray-500 uppercase">Product Name</label><input type="text" class="w-full border rounded p-2"></div>
-            <div><label class="block text-xs font-bold text-gray-500 uppercase">Quantity (Unit)</label><input type="text" class="w-full border rounded p-2"></div>
+          <form th:action="@{/inventory}" th:object="${stock}" method="post" class="space-y-4">
+            <div>
+              <label for="product_name" class="block text-xs font-bold text-gray-500 uppercase">Product Name</label>
+              <input id="product_name" th:field="*{productName}" type="text" class="w-full border rounded p-2"></div>
+            <div>
+              <label for="quantity" class="block text-xs font-bold text-gray-500 uppercase">Quantity (Unit)</label>
+              <input id="quantity" th:field="*{quantity}" type="text" class="w-full border rounded p-2"></div>
             <button type="submit" class="w-full bg-black text-white py-2 rounded font-bold">Update Stock</button>
           </form>
         </div>
@@ -39,10 +43,20 @@
         <div class="flex-1 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <table class="w-full text-left text-sm">
             <thead class="bg-gray-100 text-xs font-bold uppercase">
-            <tr><th class="p-4">Item</th><th class="p-4">Quantity In Stock</th><th class="p-4 text-right">Actions</th></tr>
+              <tr>
+                <th class="p-4">Item</th><th class="p-4">Quantity In Stock</th><th class="p-4 text-right">Actions</th>
+              </tr>
             </thead>
-            <tbody class="divide-y">
-            <tr><td class="p-4">Basmati Rice</td><td class="p-4">45 Bags</td><td class="p-4 text-right"><button class="text-red-600">Remove</button></td></tr>
+            <tbody th:each="stock : ${stocks}" class="divide-y">
+            <tr>
+              <td th:text="${stock.productName}" class="p-4"></td>
+              <td th:text="${stock.quantity}" class="p-4"></td>
+              <td class="p-4 text-right">
+                <a  th:href="@{}">
+                  <button class="text-red-600">Remove</button>
+                </a>
+              </td>
+            </tr>
             </tbody>
           </table>
         </div>

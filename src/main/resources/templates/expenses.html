@@ -14,10 +14,22 @@
         <h1 class="text-2xl font-black italic tracking-tighter">ASANKA <span class="text-red-600">AVENUE</span></h1>
       </div>
       <nav class="flex-1 px-4 py-8 space-y-4">
-        <a th:href="@{/dashboard}" class="flex items-center hover:cursor-pointer space-x-3 px-4 py-3 text-gray-400 hover:text-white transition"><i class="fas fa-chart-pie"></i><span>Dashboard</span></a>
-        <a th:href="@{/sales}" class="flex items-center hover:cursor-pointer space-x-3 px-4 py-3 text-gray-400 hover:text-white transition"><i class="fas fa-receipt"></i><span>Sales</span></a>
-        <a th:href="@{/expenses}" class="flex items-center hover:cursor-pointer space-x-3 px-4 py-3 bg-red-600 rounded-lg shadow-lg"><i class="fas fa-credit-card"></i><span>Expenses</span></a>
-        <a th:href="@{/inventory}" class="flex items-center hover:cursor-pointer space-x-3 px-4 py-3 text-gray-400 hover:text-white transition"><i class="fas fa-boxes"></i><span>Inventory</span></a>
+        <a th:href="@{/dashboard}" class="flex items-center hover:cursor-pointer space-x-3 px-4 py-3 text-gray-400 hover:text-white transition">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a th:href="@{/sales}" class="flex items-center hover:cursor-pointer space-x-3 px-4 py-3 text-gray-400 hover:text-white transition">
+          <i class="fas fa-receipt"></i>
+          <span>Sales</span>
+        </a>
+        <a th:href="@{/expenses}" class="flex items-center hover:cursor-pointer space-x-3 px-4 py-3 bg-red-600 rounded-lg shadow-lg">
+          <i class="fas fa-credit-card"></i>
+          <span>Expenses</span>
+        </a>
+        <a th:href="@{/inventory}" class="flex items-center hover:cursor-pointer space-x-3 px-4 py-3 text-gray-400 hover:text-white transition">
+          <i class="fas fa-boxes"></i>
+          <span>Inventory</span>
+        </a>
       </nav>
     </aside>
 
@@ -44,13 +56,21 @@
         <div class="flex-1 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <table class="w-full text-left text-sm">
             <thead class="bg-gray-50 text-xs font-bold uppercase">
-              <tr><th class="p-4">Category</th><th class="p-4">Cost</th><th class="p-4 text-right">Actions</th></tr>
+              <tr>
+                <th class="p-4">Category</th>
+                <th class="p-4">Cost</th><th class="p-4 text-right">Actions</th>
+              </tr>
             </thead>
             <tbody th:each="expense : ${expenses}" class="divide-y divide-gray-100">
               <tr>
                 <td th:text="${expense.description}" class="p-4"></td>
                 <td th:text="${expense.cost}" class="p-4 font-bold"></td>
-                <td class="p-4 text-right"><button class="text-red-600">Delete</button></td>
+                <td class="p-4 text-right">
+                  <form th:action="@{/expenses/delete/{id}(id=${expense.id})}" th:object="${expense}" method="post">
+                    <input th:field="*{id}" type="hidden">
+                    <button type="submit" class="text-red-600">Delete</button>
+                  </form>
+                </td>
               </tr>
             </tbody>
           </table>
