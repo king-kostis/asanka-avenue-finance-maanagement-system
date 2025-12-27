@@ -1,20 +1,32 @@
 package com.example.asankawebapp.model;
 
+import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
+@Entity
+@Table(name="sales")
 public class Sales {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+
+    @Column(name="item_name")
     private String itemName;
-    private LocalDate dateOfSale;
+
+    @Column(name="sale_date")
+    private LocalDate dateOfSale = LocalDate.now();
+
+    @Column(name="price")
     private double price;
 
-    public Sales(int id, String itemName, LocalDate dateOfSale, double price){
+    public Sales(int id, String itemName, double price){
         this.id = id;
         this.itemName = itemName;
-        this.dateOfSale = dateOfSale;
         this.price = price;
     }
 

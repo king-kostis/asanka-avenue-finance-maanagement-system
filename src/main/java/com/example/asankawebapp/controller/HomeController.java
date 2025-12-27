@@ -61,7 +61,7 @@ public class HomeController {
         return "expenses.html";
     }
 
-    @PostMapping("/expenses/add")
+    @PostMapping("/expenses")
     public String addSales(@ModelAttribute("expense") Expenses expense){
         expenseService.add(expense);
 

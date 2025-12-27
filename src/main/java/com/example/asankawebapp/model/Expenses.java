@@ -19,15 +19,14 @@ public class Expenses {
     private String description;
 
     @Column(name="expense_date")
-    private LocalDate expenseDate;
+    private LocalDate expenseDate = LocalDate.now();
 
     @Column(name="cost")
     private double cost;
 
-    public Expenses(int id, String description, LocalDate expenseDate, double cost){
+    public Expenses(int id, String description, double cost){
         this.id = id;
         this.description = description;
-        this.expenseDate = expenseDate;
         this.cost = cost;
     }
 

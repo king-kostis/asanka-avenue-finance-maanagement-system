@@ -14,11 +14,15 @@ import java.util.Optional;
 @Service
 public class ExpenseService {
 
-    @Autowired
-    private ExpensesRepository expensesRepository;
+    private final ExpensesRepository expensesRepository;
+
+    public ExpenseService(ExpensesRepository expensesRepository){
+        this.expensesRepository = expensesRepository;
+    }
 
     public List<Expenses> getAll(){
         List<Expenses> expenses = new ArrayList<>();
+        expenses = expensesRepository.findAll();
         return expenses;
     }
 
