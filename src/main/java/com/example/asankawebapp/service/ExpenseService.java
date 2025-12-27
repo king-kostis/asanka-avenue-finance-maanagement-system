@@ -2,19 +2,18 @@ package com.example.asankawebapp.service;
 
 import com.example.asankawebapp.model.Expenses;
 import com.example.asankawebapp.repository.ExpensesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ExpenseService {
 
     private final ExpensesRepository expensesRepository;
+    private static final LocalDate currentDate = LocalDate.now();
 
     public ExpenseService(ExpensesRepository expensesRepository){
         this.expensesRepository = expensesRepository;
@@ -38,7 +37,6 @@ public class ExpenseService {
     public double totalDaily(){
         double total = 0;
         for(int i = 0; i < getAll().size(); i++){
-            LocalDate currentDate = LocalDate.now();
             LocalDate expenseDate = getAll().get(i).getExpenseDate();
 
             if(currentDate.equals(expenseDate)) {
@@ -52,7 +50,6 @@ public class ExpenseService {
     public double totalMonthly(){
         double total = 0;
         for(int i = 0; i < getAll().size(); i++){
-            LocalDate currentDate = LocalDate.now();
             LocalDate expenseDate = getAll().get(i).getExpenseDate();
 
             long dateInterval = ChronoUnit.DAYS.between(currentDate, expenseDate);
@@ -68,7 +65,6 @@ public class ExpenseService {
     public double totalYearly(){
         double total = 0;
         for(int i = 0; i < getAll().size(); i++){
-            LocalDate currentDate = LocalDate.now();
             LocalDate expenseDate = getAll().get(i).getExpenseDate();
 
             long dateInterval = ChronoUnit.DAYS.between(currentDate, expenseDate);

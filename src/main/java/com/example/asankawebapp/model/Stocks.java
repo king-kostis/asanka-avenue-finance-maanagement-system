@@ -63,4 +63,14 @@ public class Stocks {
     public void setQuantity(int quantity){
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "Stocks{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", stockDate=" + stockDate +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
